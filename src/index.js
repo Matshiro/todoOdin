@@ -3,8 +3,8 @@ import {createSidenav} from './pages/ui';
 try{
     createUI();
 }
-catch{
-    throw "Problem w wygenerowaniu UI w createUI();"
+catch(e){
+    throw "Problem w wygenerowaniu UI w createUI(); \n" + e.message;
 }
 
 function createUI(){

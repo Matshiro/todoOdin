@@ -3,6 +3,8 @@ import inbox from '../assets/images/inbox.svg';
 import today from '../assets/images/today.svg';
 import week from '../assets/images/week.svg';
 
+import { addProjectButon } from './projects';
+
 
 export function createSidenav(){
     const sidenavContainer = document.createElement('sidenav');
@@ -25,7 +27,7 @@ export function createSidenav(){
     projectsContainer.id = "projectsContainer";
     mainContainer.appendChild(projectsContainer);
 
-    projectsContainer.appendChild(addProjectButton());
+    projectsContainer.appendChild(addProjectContainer());
 
     return sidenavContainer;
 }
@@ -47,37 +49,12 @@ function createSideButton(name, icon){
     return div;
 }
 
-function addProjectButton(){
+function addProjectContainer(){
     const div = document.createElement('div');
     div.id = "createProjectDiv";
 
-    const button = document.createElement('button');
-    button.className = "projectButton";
-    button.id = "createProjectButton";
-    div.appendChild(button);
-
-    
+    addProjectButon(div);
 
     return div;
 }
 
-function addProjectInput(){
-    const input = document.createElement('input');
-    input.id = "createProjectInput";
-    div.appendChild(input);
-
-    const divButtons = document.createElement('div');
-    divButtons.id = "createProjectDivButtons";
-    div.appendChild(divButtons);
-    
-    divButtons.appendChild(createButton("projectAdd"));
-    divButtons.appendChild(createButton("projectCancel"));
-}
-
-function createButton(type){
-    const button = document.createElement('button');
-    button.className = "addCancelButton";
-    button.id = type;
-    
-    return button;
-}

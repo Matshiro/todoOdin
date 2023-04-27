@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
+
+:root{
+    --font-size-p: 20px;
+    --font-size-h3: 26px;
+
+    --border-color-sidenav: #00000055;
+
+    --background-color-sidenav: #FCFCFC;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    height: 100dvh;
+    overflow-y: hidden;
+    background: #DFDFDF99;
+}
+
+#mainSidenavContainer{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    min-width: 250px;
+    height: 100%;
+    background: var(--background-color-sidenav);
+    border-right: solid 0.5px var(--border-color-sidenav);
+}
+
+.sidenavButton{
+    display: flex;
+    align-items: flex-end;
+    background: transparent;
+    gap: 3%;
+    margin-top: 9%;
+    margin-left: 15%;
+    cursor: pointer;
+}
+
+.sidenavButton:first-child{
+    margin-top: 20%;
+}
+
+.sidenavText{
+    font-size: var(--font-size-p);
+}
+
+.sidenavImage{
+    max-width: 1.5rem;
+    max-height: auto;
+}
+
+#sidenavProjectText{
+    padding-left: 10%;
+    margin-top: 20%;
+    padding-top: 5%;
+    font-size: var(--font-size-h3);
+    font-weight: 800;
+    border-top: solid 1px var(--border-color-sidenav);
+}
+

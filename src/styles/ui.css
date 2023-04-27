@@ -63,6 +63,11 @@ body{
     border-top: solid 1px var(--border-color-sidenav);
 }
 
+#createProjectDiv{
+    display: flex;
+    flex-direction: column;
+}
+
 #createProjectButton{
     background: transparent;
     cursor: pointer;
@@ -71,7 +76,19 @@ body{
     margin-top: 9%;
 }
 
+#inputContainer{
+    display: flex;
+    flex-direction: column;
+}
 
+#createProjectInput{
+    width: 80%;
+    align-self: center;
+    border: solid 1px var(--border-color-sidenav);
+    font-size: var(--font-size-p);
+    margin-bottom: 5%;
+    margin-top: 9%;
+}
 
 #createProjectDivButtons{
     display: flex;
@@ -84,14 +101,23 @@ body{
     min-width: 30%;
     min-height: 15%;
     cursor: pointer;
+    font-weight: bold;
 }
 
 #projectAdd{
-    background-color: #69f869d5;
-    border: solid 1px #69f869;
+    background-color: #69ff6911;
+    border: solid 1px #33ff33;
+}
+
+#projectAdd:hover{
+    background-color: #69ff6933;
 }
 
 #projectCancel{
-    background-color: #ff6b6bd5;
-    border: solid 1px #ff6b6b;
+    background-color: #ff6b6b11;
+    border: solid 1px #ff3333;
+}
+
+#projectCancel:hover{
+    background-color: #ff6b6b33;
 }

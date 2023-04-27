@@ -1,17 +1,5 @@
 import add from '../assets/images/add.svg';
 
-export function addNewProject(createProjectDiv){
-    try{
-        createProjectDiv.removeChild(createProjectDiv.firstChild);
-    }
-    catch(e){
-        console.log("Error in addNewProject \n" + e);
-    }
-    finally{
-        addProjectInput(createProjectDiv)
-    }
-
-}
 
 export function addProjectButon(div){
     const button = document.createElement('button');
@@ -32,15 +20,32 @@ export function addProjectButon(div){
 
 }
 
+export function addNewProject(createProjectDiv){
+    try{
+        createProjectDiv.removeChild(createProjectDiv.firstChild);
+    }
+    catch(e){
+        console.log("Error in addNewProject \n" + e);
+    }
+    finally{
+        addProjectInput(createProjectDiv)
+    }
+
+}
+
 
 function addProjectInput(div){
+    const container = document.createElement('container');
+    container.id = "inputContainer";
+    div.appendChild(container);
+
     const input = document.createElement('input');
     input.id = "createProjectInput";
-    div.appendChild(input);
+    container.appendChild(input);
 
     const divButtons = document.createElement('div');
     divButtons.id = "createProjectDivButtons";
-    div.appendChild(divButtons);
+    container.appendChild(divButtons);
     
     divButtons.appendChild(createButton("projectAdd"));
     divButtons.appendChild(createButton("projectCancel"));
@@ -54,13 +59,18 @@ function createButton(type){
     button.id = type;
     if (type === "projectAdd"){
         button.textContent = "Add";
-        button.addEventListener('click', function(){})
+        button.addEventListener('click', function(){
+
+        })
         
     }
     if (type === "projectCancel"){
         button.textContent = "Cancel";
+        button.addEventListener('click', function(){
+            addProjectButon(document.getElementById("createProjectDiv"));
+            createProjectDiv.removeChild(createProjectDiv.firstChild);
+        })
     }
 
-    
     return button;
 }

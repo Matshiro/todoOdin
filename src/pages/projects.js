@@ -1,5 +1,8 @@
 import add from '../assets/images/add.svg';
+import list from '../assets/images/list.svg';
+import { createImg, createText } from './builders';
 
+const projectsList = [];
 
 export function addProjectButon(div){
     const button = document.createElement('button');
@@ -8,15 +11,8 @@ export function addProjectButon(div){
     button.addEventListener('click', function(){addNewProject(div)})
     div.appendChild(button);
 
-    const img = document.createElement('img');
-    img.className = "sidenavImage";
-    img.src = add;
-    button.appendChild(img);
-
-    const text = document.createElement('p');
-    text.className = "sidenavText";
-    text.textContent = "Add Project";
-    button.appendChild(text);
+    button.appendChild(createImg("sidenavImage", add));
+    button.appendChild(createText("p", null, "sidenavText", "Add Project"));
 
 }
 
@@ -41,6 +37,7 @@ function addProjectInput(div){
 
     const input = document.createElement('input');
     input.id = "createProjectInput";
+    input.placeholder = "Project name";
     container.appendChild(input);
 
     const divButtons = document.createElement('div');
@@ -60,17 +57,43 @@ function createButton(type){
     if (type === "projectAdd"){
         button.textContent = "Add";
         button.addEventListener('click', function(){
-
+            addProject();
         })
         
     }
     if (type === "projectCancel"){
         button.textContent = "Cancel";
         button.addEventListener('click', function(){
-            addProjectButon(document.getElementById("createProjectDiv"));
-            createProjectDiv.removeChild(createProjectDiv.firstChild);
+            removeProjectInput();
         })
     }
 
     return button;
 }
+
+function addProject(){
+    const projectName = document.getElementById("createProjectInput").value;
+    createProjectButton(projectName);
+    projectsList.push(projectName);
+    removeProjectInput();
+}
+
+function removeProjectInput(){
+    addProjectButon(document.getElementById("createProjectDiv"));
+    createProjectDiv.removeChild(createProjectDiv.firstChild);
+}
+
+function createProjectButton(name){
+    const button = document.createElement('button');
+    button.id = "projectButton" + projectsList.length;
+    button.className = "projectButton";
+
+    button.appendChild(createImg("sidenavImage", list));
+    button.appendChild(createText("p", null, "sidenavText", name));
+
+    const projectsContainer = document.getElementById("projectsContainer");
+    projectsContainer.insertBefore(button, projectsContainer.lastChild);
+
+}
+
+

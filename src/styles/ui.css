@@ -7,6 +7,13 @@
     --border-color-sidenav: #00000055;
 
     --background-color-sidenav: #FCFCFC;
+    --background-color-header: #F3F3F3;
+    --button-backgroud-color-add: #69ff6911;
+    --button-backgroud-color-add-hover: #69ff6933;
+    --button-backgroud-color-cancel: #ff6b6b11;;
+    --button-backgroud-color-cancel-hover: #ff6b6b33;
+    --border-color-add: #33ff33;
+    --border-color-cancel: #ff3333;
 }
 
 *{
@@ -17,14 +24,20 @@
 }
 body{
     height: 100dvh;
+    width: 100dvw;
     overflow-y: hidden;
+    display: flex;
+}
+
+#sidenav{
+    width: 15%;
+    min-width: 250px;
 }
 
 #mainSidenavContainer{
     display: flex;
     flex-direction: column;
-    width: 15%;
-    min-width: 250px;
+
     height: 100%;
     background: var(--background-color-sidenav);
     border-right: solid 0.5px var(--border-color-sidenav);
@@ -41,7 +54,7 @@ body{
 }
 
 .sidenavButton:first-child{
-    margin-top: 20%;
+    margin-top: 30%;
 }
 
 .sidenavText{
@@ -105,19 +118,36 @@ body{
 }
 
 #projectAdd{
-    background-color: #69ff6911;
-    border: solid 1px #33ff33;
+    background-color: var(--button-backgroud-color-add);
+    border: solid 1px var(--border-color-add);
 }
 
 #projectAdd:hover{
-    background-color: #69ff6933;
+    background-color: var(--button-backgroud-color-add-hover);
 }
 
 #projectCancel{
-    background-color: #ff6b6b11;
-    border: solid 1px #ff3333;
+    background-color: var(--button-backgroud-color-cancel);
+    border: solid 1px var(--border-color-cancel);
 }
 
 #projectCancel:hover{
-    background-color: #ff6b6b33;
+    background-color: var(--button-backgroud-color-cancel-hover);
+}
+
+#rightContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#headerContainer{
+    background-color: var(--background-color-header);
+}
+
+#headerText{
+    font-style: oblique;
+    padding: 1%;
+    padding-left: 10%;
+    border-bottom: solid 1px var(--border-color-sidenav);
 }

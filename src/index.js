@@ -1,4 +1,4 @@
-import {createSidenav} from './pages/ui';
+import {createSidenav, createRightSection} from './pages/ui';
 
 try{
     createUI();
@@ -8,5 +8,17 @@ catch(e){
 }
 
 function createUI(){
-    document.body.appendChild(createSidenav());
+    try{
+        document.body.appendChild(createSidenav());
+    }
+    catch(e){
+        throw "Problem w wygenerowaniu sidenava \n" + e.message;
+    }
+    try{
+        document.body.appendChild(createRightSection());
+    }
+    catch(e){
+        throw "Problem w wygenerowaniu prawego containera \n" + e.message;
+    }
+    
 }

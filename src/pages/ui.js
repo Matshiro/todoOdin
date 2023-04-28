@@ -58,3 +58,31 @@ function addProjectContainer(){
     return div;
 }
 
+export function createRightSection(){
+    const container = document.createElement('container');
+    container.id = "rightContainer";
+    container.appendChild(createHeader());
+    container.appendChild(createMain());
+
+    return container;
+}
+
+
+function createHeader(){
+    const container = document.createElement('container');
+    container.id = "headerContainer";
+    const text = document.createElement('h1');
+    text.id = "headerText";
+    text.textContent = "List doTo";
+    container.appendChild(text);
+
+    return container;
+}
+
+function createMain(){
+    const container = document.createElement('contaier');
+    container.id = "mainContainer";
+
+
+    return container;
+}

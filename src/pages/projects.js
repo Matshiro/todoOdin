@@ -1,9 +1,11 @@
 import add from '../assets/images/add.svg';
 import list from '../assets/images/list.svg';
+import close from '../assets/images/close.svg';
 import { createImg, createText, createButton } from './builders';
 import { buttonClicked } from './ui';
 
-const projectsList = [];
+export const projectsList = new Map;
+projectsList.set("Inbox",[]);
 
 export function addProjectButon(div){
     const button = document.createElement('button');
@@ -45,13 +47,13 @@ function addProjectInput(div){
     divButtons.id = "createProjectDivButtons";
     container.appendChild(divButtons);
     
-    const buttonAdd = createButton("projectAdd", "addCancelButton", "Add", null,);
+    const buttonAdd = createButton("projectAdd", "addCancelButton", "Add");
     buttonAdd.addEventListener("click", function(){
         addProject();
     })
     divButtons.appendChild(buttonAdd);
 
-    const buttonCancel = createButton("projectCancel", "addCancelButton", "Cancel", null,);
+    const buttonCancel = createButton("projectCancel", "addCancelButton", "Cancel",);
     buttonCancel.addEventListener("click", function(){
         removeProjectInput();
     })
@@ -61,40 +63,20 @@ function addProjectInput(div){
     return input;
 }
 
-function createButtonUI(type){
-    const button = document.createElement('button');
-    button.className = "addCancelButton";
-    button.id = type;
-    if (type === "projectAdd"){
-        button.textContent = "Add";
-        button.addEventListener('click', function(){
-            addProject();
-        })
-        
-    }
-    if (type === "projectCancel"){
-        button.textContent = "Cancel";
-        button.addEventListener('click', function(){
-            removeProjectInput();
-        })
-    }
-
-    return button;
-}
-
 function addProject(){
     const projectName = document.getElementById("createProjectInput");
+    const tasksInProject = [];
     if (projectName.value == ""){
         projectName.placeholder = "Can't be empty";
         return;
     }
-    if (projectsList.includes(projectName.value)){
+    if (projectsList.has(projectName.value)){
         projectName.value = "";
         projectName.placeholder = "Name exists";
         return;
     }
     createProjectButton(projectName.value);
-    projectsList.push(projectName.value);
+    projectsList.set(projectName.value, []);
     removeProjectInput();
 }
 
@@ -104,16 +86,31 @@ function removeProjectInput(){
 }
 
 function createProjectButton(name){
-    const button = document.createElement('button');
-    button.id = "projectButton" + projectsList.length;
-    button.className = "projectButton";
+    const button = createButton("projectButton"+ projectsList.length, "projectButton");
 
     button.appendChild(createImg(null, "sidenavImage", list));
     button.appendChild(createText("p", null, "sidenavText", name));
+    button.addEventListener("click", function(){
+        buttonClicked(button);
+    })
+    const closeButton = createButton(null,"closeButton",null);
+    closeButton.addEventListener("click", function(){
+        deleteProject(name, button);
+    })
+
+    const img = createImg(null, "sidenavImage", close);
+    img.classList.add("closeButtonImg");
+    closeButton.appendChild(img);
+
+    button.appendChild(closeButton)
 
     const projectsContainer = document.getElementById("projectsContainer");
     projectsContainer.insertBefore(button, projectsContainer.lastChild);
 
 }
 
+function deleteProject(name, button){
+    projectsList.delete(name.toString());
+    button.remove();
+}
 

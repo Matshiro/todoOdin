@@ -3,6 +3,7 @@
 :root{
     --font-size-p: clamp(.5rem, 20px, 2rem);
     --font-size-h3: 26px;
+    --font-size-h2: 32px;
 
     --border-color-sidenav: #00000055;
 
@@ -48,16 +49,16 @@ body{
     align-items: flex-end;
     background: transparent;
     width: 80%;
-    border-radius: 5px;
-    padding: 1%;
+    border-radius: 10px;
+    padding: 2%;
     gap: 3%;
-    margin-top: 8%;
+    margin-top: 6%;
     margin-left: 14%;
     cursor: pointer;
 }
 
 .buttonClicked{
-    background-color: var(--button-backgroud-color-active);
+    background-color: var(--button-backgroud-color-active) !important;
 }
 
 .sidenavButton:first-child{
@@ -65,10 +66,12 @@ body{
 }
 
 .sidenavText{
-    max-width: 100%;
+    min-width: 65%;
+    max-width: 65%;
     font-size: var(--font-size-p);
     font-weight: 200;
     margin-left: 2%;
+    text-align: left;
     text-overflow:ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -98,10 +101,13 @@ body{
     cursor: pointer;
     display: flex;
     width: 80%;
-    margin-left: 15%;
-    margin-top: 9%;
+    padding: 2%;
+    border-radius: 5px;
+    margin-left: 14%;
+    margin-top: 6%;
     gap: .5rem;
 }
+
 
 .projectButton:last-child{
     gap: 2%;
@@ -154,6 +160,12 @@ body{
     background-color: var(--button-backgroud-color-cancel-hover);
 }
 
+.closeButton{
+    cursor: pointer;
+    background-color: transparent;
+    margin-right: 0;
+}
+
 
 #rightContainer{
     display: flex;
@@ -170,5 +182,16 @@ body{
     padding: 1%;
     padding-left: 10%;
     border-bottom: solid 1px var(--border-color-sidenav);
+}
+
+#mainContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 2% 25%;
+}
+
+#mainSectionHeader{
+    font-size: var(--font-size-h2);
+    margin-bottom: 5%;
 }
 

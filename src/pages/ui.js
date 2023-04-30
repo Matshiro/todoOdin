@@ -18,10 +18,7 @@ export function createSidenav(){
     mainContainer.appendChild(createSideButton("Today", today));
     mainContainer.appendChild(createSideButton("This week", week));
     
-    const projectsText = document.createElement('div');
-    projectsText.id = "sidenavProjectText";
-    projectsText.textContent = "Projects";
-    mainContainer.appendChild(projectsText);
+    mainContainer.appendChild(createText("div", "sidenavProjectText", null, "Projects"));
 
     const projectsContainer = document.createElement('container');
     projectsContainer.id = "projectsContainer";
@@ -41,14 +38,15 @@ function createSideButton(name, icon){
     button.addEventListener('click', function(){
          buttonClicked(button);
     })
-
+    if (name === "Inbox"){
+        button.classList.add("buttonClicked");
+    }
     return button;
 
 }
 
 export function buttonClicked(button){
     const buttonClicked = document.querySelector(".buttonClicked");
-    console.log(buttonClicked);
     if (!buttonClicked){
         button.classList.add("buttonClicked");
         return;
@@ -79,10 +77,7 @@ export function createRightSection(){
 function createHeader(){
     const container = document.createElement('container');
     container.id = "headerContainer";
-    const text = document.createElement('h1');
-    text.id = "headerText";
-    text.textContent = "List doTo";
-    container.appendChild(text);
+    container.appendChild(createText("h1", "headerText", null, "List doTo"));
 
     return container;
 }
@@ -91,6 +86,11 @@ function createMain(){
     const container = document.createElement('contaier');
     container.id = "mainContainer";
 
+    container.appendChild(createText("h2", "mainSectionHeader", null, "Inbox"));
+
+    const taskContainer = document.createElement('container');
+    taskContainer.id = "taskContainer";
+    container.appendChild(taskContainer);
 
     return container;
 }

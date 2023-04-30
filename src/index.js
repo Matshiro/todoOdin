@@ -1,11 +1,9 @@
 import {createSidenav, createRightSection} from './pages/ui';
+import { showInbox } from './pages/mainSection';
 
-try{
-    createUI();
-}
-catch(e){
-    throw "Problem w wygenerowaniu UI w createUI(); \n" + e.message;
-}
+
+createUI();
+
 
 function createUI(){
     try{
@@ -16,6 +14,7 @@ function createUI(){
     }
     try{
         document.body.appendChild(createRightSection());
+        showInbox();
     }
     catch(e){
         throw "Problem w wygenerowaniu prawego containera \n" + e.message;

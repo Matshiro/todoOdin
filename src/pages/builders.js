@@ -31,7 +31,7 @@ export function createImg(id = null, className, src){
     return img;
 }
 
-export function createButton(id, className, buttonText = null, buttonImg = null){
+export function createButton(id, className, buttonText = null){
     const button = document.createElement('button');
 
     if (id !== null){
@@ -42,9 +42,6 @@ export function createButton(id, className, buttonText = null, buttonImg = null)
     }
     if (buttonText !== null){
         button.textContent = buttonText;
-    }
-    if (buttonImg !== null){
-        button.src = buttonImg;
     }
     return button;
 }

@@ -1,27 +1,50 @@
 export function createContainer(){
-
+    console.log("a");
 }
 
-export function createText(type, classId, className, textValue){
+export function createText(type, id, className, textValue){
     const text = document.createElement(type);
-    text.id = classId;
-    text.className = className
     text.textContent = textValue;
 
-    if (classId === null){
-        text.removeAttribute('id');
+    if (id !== null){
+        text.id = id;
     }
-    if (className === null){
-        text.removeAttribute('id');
+    if (className !== null){
+        text.className = className;
     }
 
     return text;
 }
 
-export function createImg(className,src){
+export function createImg(id = null, className, src){
     const img = document.createElement('img');
-    img.classList = className;
-    img.src = src;
-
+    if (id != null){
+        img.id = id;
+    }
+    if (className != null){
+        img.className = className;
+    }
+    if (src != null){
+        img.src = src;
+    }
+    
     return img;
+}
+
+export function createButton(id, className, buttonText = null, buttonImg = null){
+    const button = document.createElement('button');
+
+    if (id !== null){
+        button.id = id;
+    }
+    if (className !== null){
+        button.className = className;
+    }
+    if (buttonText !== null){
+        button.textContent = buttonText;
+    }
+    if (buttonImg !== null){
+        button.src = buttonImg;
+    }
+    return button;
 }

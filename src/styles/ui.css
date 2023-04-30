@@ -12,6 +12,7 @@
     --button-backgroud-color-add-hover: #69ff6933;
     --button-backgroud-color-cancel: #ff6b6b11;;
     --button-backgroud-color-cancel-hover: #ff6b6b33;
+    --button-backgroud-color-active: #DDD;
     --border-color-add: #33ff33;
     --border-color-cancel: #ff3333;
 }
@@ -37,7 +38,6 @@ body{
 #mainSidenavContainer{
     display: flex;
     flex-direction: column;
-
     height: 100%;
     background: var(--background-color-sidenav);
     border-right: solid 0.5px var(--border-color-sidenav);
@@ -47,10 +47,17 @@ body{
     display: flex;
     align-items: flex-end;
     background: transparent;
+    width: 80%;
+    border-radius: 5px;
+    padding: 1%;
     gap: 3%;
-    margin-top: 9%;
-    margin-left: 15%;
+    margin-top: 8%;
+    margin-left: 14%;
     cursor: pointer;
+}
+
+.buttonClicked{
+    background-color: var(--button-backgroud-color-active);
 }
 
 .sidenavButton:first-child{
@@ -113,6 +120,7 @@ body{
     margin-bottom: 5%;
     margin-top: 9%;
 }
+
 
 #createProjectDivButtons{
     display: flex;

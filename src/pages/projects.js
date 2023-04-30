@@ -1,6 +1,7 @@
 import add from '../assets/images/add.svg';
 import list from '../assets/images/list.svg';
-import { createImg, createText } from './builders';
+import { createImg, createText, createButton } from './builders';
+import { buttonClicked } from './ui';
 
 const projectsList = [];
 
@@ -11,7 +12,7 @@ export function addProjectButon(div){
     button.addEventListener('click', function(){addNewProject(div)})
     div.appendChild(button);
 
-    button.appendChild(createImg("sidenavImage", add));
+    button.appendChild(createImg(null, "sidenavImage", add));
     button.appendChild(createText("p", null, "sidenavText", "Add Project"));
 
 }
@@ -44,13 +45,23 @@ function addProjectInput(div){
     divButtons.id = "createProjectDivButtons";
     container.appendChild(divButtons);
     
-    divButtons.appendChild(createButton("projectAdd"));
-    divButtons.appendChild(createButton("projectCancel"));
+    const buttonAdd = createButton("projectAdd", "addCancelButton", "Add", null,);
+    buttonAdd.addEventListener("click", function(){
+        addProject();
+    })
+    divButtons.appendChild(buttonAdd);
 
+    const buttonCancel = createButton("projectCancel", "addCancelButton", "Cancel", null,);
+    buttonCancel.addEventListener("click", function(){
+        removeProjectInput();
+    })
+    divButtons.appendChild(buttonCancel);
+
+    input.focus();
     return input;
 }
 
-function createButton(type){
+function createButtonUI(type){
     const button = document.createElement('button');
     button.className = "addCancelButton";
     button.id = type;
@@ -72,9 +83,18 @@ function createButton(type){
 }
 
 function addProject(){
-    const projectName = document.getElementById("createProjectInput").value;
-    createProjectButton(projectName);
-    projectsList.push(projectName);
+    const projectName = document.getElementById("createProjectInput");
+    if (projectName.value == ""){
+        projectName.placeholder = "Can't be empty";
+        return;
+    }
+    if (projectsList.includes(projectName.value)){
+        projectName.value = "";
+        projectName.placeholder = "Name exists";
+        return;
+    }
+    createProjectButton(projectName.value);
+    projectsList.push(projectName.value);
     removeProjectInput();
 }
 
@@ -88,7 +108,7 @@ function createProjectButton(name){
     button.id = "projectButton" + projectsList.length;
     button.className = "projectButton";
 
-    button.appendChild(createImg("sidenavImage", list));
+    button.appendChild(createImg(null, "sidenavImage", list));
     button.appendChild(createText("p", null, "sidenavText", name));
 
     const projectsContainer = document.getElementById("projectsContainer");

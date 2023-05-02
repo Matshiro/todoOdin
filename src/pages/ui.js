@@ -4,7 +4,7 @@ import today from '../assets/images/today.svg';
 import week from '../assets/images/week.svg';
 import { createImg, createText, createButton } from './builders';
 
-import { addProjectButon } from './projects';
+import { addProjectButon } from './projectsAndTasks';
 
 export function createSidenav(){
     const sidenavContainer = document.createElement('sidenav');
@@ -94,3 +94,4 @@ function createMain(){
 
     return container;
 }
+

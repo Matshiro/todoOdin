@@ -45,3 +45,9 @@ export function createButton(id, className, buttonText = null){
     }
     return button;
 }
+
+
+export function createAddProjectTask(div, isProject){
+
+}
+

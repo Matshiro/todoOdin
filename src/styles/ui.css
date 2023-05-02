@@ -14,6 +14,7 @@
     --button-backgroud-color-cancel: #ff6b6b11;;
     --button-backgroud-color-cancel-hover: #ff6b6b33;
     --button-backgroud-color-active: #DDD;
+    --button-backgroud-color-hover: #EEE;
     --border-color-add: #33ff33;
     --border-color-cancel: #ff3333;
 }
@@ -49,12 +50,16 @@ body{
     align-items: flex-end;
     background: transparent;
     width: 80%;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 2%;
     gap: 3%;
     margin-top: 6%;
     margin-left: 14%;
     cursor: pointer;
+}
+
+.sidenavButton:hover{
+    background-color: var(--button-backgroud-color-hover);
 }
 
 .buttonClicked{
@@ -108,6 +113,9 @@ body{
     gap: .5rem;
 }
 
+.projectButton:hover{
+    background-color: var(--button-backgroud-color-hover);
+}
 
 .projectButton:last-child{
     gap: 2%;
@@ -193,5 +201,18 @@ body{
 #mainSectionHeader{
     font-size: var(--font-size-h2);
     margin-bottom: 5%;
+}
+
+.taskButton{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 1%;
+    border-radius: 5px;
+}
+.taskButton:hover{
+    background-color: var(--button-backgroud-color-hover);
 }
 

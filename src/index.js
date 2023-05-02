@@ -17,7 +17,6 @@ function createUI(){
     }
     try{
         document.body.appendChild(createRightSection());
-        showInbox();
     }
     catch(e){
         throw "Problem w wygenerowaniu prawego containera \n" + e.message;

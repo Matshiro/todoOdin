@@ -7,7 +7,7 @@ import { showInbox } from './mainSection';
 
 export let projectsList = new Map;
 projectsList.set("Inbox",[]);
-let localStorageExists;
+export let localStorageExists;
 
 document.addEventListener("DOMContentLoaded", function() {
     checkLocalStorage();
@@ -16,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function checkLocalStorage(){
     if (storageAvailable("localStorage")) {
-        localStorageExists = true;
         checkForProjectList();
+        localStorageExists = true;
+        showInbox();
       } else {
         projectsList.set("Inbox",[]);
     }
@@ -53,14 +54,12 @@ function storageAvailable(type) {
   
 function checkForProjectList(){
     const localStorageProjectList = localStorage.getItem("projectsList");
-    console.log("LocalStorage " + localStorageProjectList);
-    if (localStorageProjectList != null || localStorageProjectList == undefined){
+    if (localStorageProjectList != null || localStorageProjectList != undefined){
         projectsList = new Map(JSON.parse(localStorageProjectList));
         for (const key of projectsList.keys()){
             if (key == "Inbox"){
                 continue;
             }
-            console.log(key);
             createProjectButton(key);
         }
         return;
@@ -189,7 +188,9 @@ function createProjectButton(name){
 
 function deleteProject(name, button){
     projectsList.delete(name.toString());
-
+    if (localStorageExists){
+        pushToLocalStorage();
+    }
     button.remove();
 }
 
@@ -212,6 +213,9 @@ function addTask(project, container){
         }
     }
     projectsList.set(project, projectsList.get(project).concat(taskName));
+    if (localStorageExists){
+        pushToLocalStorage();
+    }
     removeTaskInput(container);
 }
 

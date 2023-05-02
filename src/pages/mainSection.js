@@ -1,6 +1,6 @@
 import { createImg, createText, createButton } from './builders';
 import add from "../assets/images/add.svg";
-import { addNewProject, createTaskButton, projectsList } from "./projectsAndTasks";
+import { addNewProject, createTaskButton, localStorageExists, projectsList } from "./projectsAndTasks";
 
 
 
@@ -37,12 +37,13 @@ function buttonAddTask(projectName, contaier){
 }
 
 function getTaskList(projectName, container){
-    const listOfValues = [...projectsList.get(projectName).values()]
-    listOfValues.forEach(element => {
-        const taskButtonId = container.querySelector("#taskButton"+element);
-        if (taskButtonId != undefined){
-            return;
-        }
-        createTaskButton(element);
-    })
+        const listOfValues = [...projectsList.get(projectName).values()];
+        listOfValues.forEach(element => {
+            const taskButtonId = container.querySelector("#taskButton"+element);
+            if (taskButtonId != undefined){
+                return;
+            }
+            return createTaskButton(element);
+            
+        })
 }

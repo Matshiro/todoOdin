@@ -1,8 +1,11 @@
 import {createSidenav, createRightSection} from './pages/ui';
 import { showInbox } from './pages/mainSection';
+import { projectsList } from './pages/projectsAndTasks';
 
 
 createUI();
+
+
 
 
 function createUI(){
@@ -21,3 +24,4 @@ function createUI(){
     }
     
 }
+

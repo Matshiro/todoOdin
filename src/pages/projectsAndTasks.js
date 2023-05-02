@@ -5,8 +5,68 @@ import { createImg, createText, createButton } from './builders';
 import { buttonClicked } from './ui';
 import { showInbox } from './mainSection';
 
-export const projectsList = new Map;
+export let projectsList = new Map;
 projectsList.set("Inbox",[]);
+let localStorageExists;
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkLocalStorage();
+  });
+
+
+function checkLocalStorage(){
+    if (storageAvailable("localStorage")) {
+        localStorageExists = true;
+        checkForProjectList();
+      } else {
+        projectsList.set("Inbox",[]);
+    }
+}
+
+
+function storageAvailable(type) {
+    let storage;
+    try {
+      storage = window[type];
+      const x = "__storage_test__";
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return (
+        e instanceof DOMException &&
+        // everything except Firefox
+        (e.code === 22 ||
+          // Firefox
+          e.code === 1014 ||
+          // test name field too, because code might not be present
+          // everything except Firefox
+          e.name === "QuotaExceededError" ||
+          // Firefox
+          e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        storage &&
+        storage.length !== 0
+      );
+    }
+}
+  
+function checkForProjectList(){
+    const localStorageProjectList = localStorage.getItem("projectsList");
+    console.log("LocalStorage " + localStorageProjectList);
+    if (localStorageProjectList != null || localStorageProjectList == undefined){
+        projectsList = new Map(JSON.parse(localStorageProjectList));
+        for (const key of projectsList.keys()){
+            if (key == "Inbox"){
+                continue;
+            }
+            console.log(key);
+            createProjectButton(key);
+        }
+        return;
+    }
+    pushToLocalStorage();
+}
 
 export function addProjectButon(div){
     const button = document.createElement('button');
@@ -92,6 +152,9 @@ function addProject(){
     }
     createProjectButton(projectName.value);
     projectsList.set(projectName.value, []);
+    if (localStorageExists){
+        pushToLocalStorage();
+    }
     removeProjectInput();
 }
 
@@ -179,4 +242,10 @@ export function createTaskButton(taskName){
     const container = document.getElementById("taskContainer");
     container.insertBefore(button, container.lastChild);
     return;
+}
+
+
+function pushToLocalStorage(){
+    const mapString = JSON.stringify(Array.from(projectsList.entries()));
+    localStorage.setItem("projectsList", mapString);
 }

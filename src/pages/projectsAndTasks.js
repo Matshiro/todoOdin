@@ -1,7 +1,7 @@
 import add from '../assets/images/add.svg';
 import list from '../assets/images/list.svg';
 import close from '../assets/images/close.svg';
-import { createImg, createText, createButton } from './builders';
+import { createImg, createText, createButton, createInput } from './builders';
 import { buttonClicked } from './ui';
 import { showInbox } from './mainSection';
 
@@ -230,33 +230,53 @@ export function createTaskButton(taskName, projectName){
 
     // button.appendChild(createImg(null, "sidenavImage", list));
     const checkButton = createButton(null, "checkButton");
+
     const text = createText("p", null, "sidenavText", taskName);
     checkButton.addEventListener("click", function(){
         checkButton.classList.toggle("checkButtonActive");
         text.classList.toggle("checkButtonActiveText");
     })
+
     button.appendChild(checkButton);
     button.appendChild(text);
     button.addEventListener("click", function(){
         return;
     })
+
     const closeButton = createButton(null,"closeButton",null);
     closeButton.addEventListener("click", function(){
         deleteTask(taskName, button, projectName);
         return;
     })
 
+    const containerForInputs = document.createElement('container');
+    containerForInputs.className = "containerForInputs";
+    button.appendChild(containerForInputs);
+
+    const colorInput = createInput(null, "colorInput", "color");
+    colorInput.addEventListener("input", function(){
+        text.style.backgroundColor = colorInput.value;
+    })
+    containerForInputs.appendChild(colorInput);
+    const dateInput = createInput(null, "dateInput", "date");
+    containerForInputs.appendChild(dateInput);
+
     const img = createImg(null, "sidenavImage", close);
     img.classList.add("closeButtonImg");
     closeButton.appendChild(img);
 
-    button.appendChild(closeButton);
+    containerForInputs.appendChild(closeButton);
 
     const container = document.getElementById("taskContainer");
     container.insertBefore(button, container.lastChild);
     return;
 }
 
+function changeTaskColor(colorPicked ,background){
+    console.log(colorPicked);
+    return background.style.backgroundColor = colorPicked.value;
+
+}
 
 function deleteTask(taskName, button, projectName){
     let project = projectsList.get(projectName.toString());

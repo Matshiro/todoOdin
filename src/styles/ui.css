@@ -77,6 +77,8 @@ body{
     font-size: var(--font-size-p);
     font-weight: 200;
     margin-left: 2%;
+    padding: 0 1%;
+    border-radius: 10px;
     text-align: left;
     text-overflow:ellipsis;
     overflow: hidden;
@@ -146,7 +148,7 @@ body{
 
 .addCancelButton{
     width: 30%;
-    height: 15%;
+    height: 100%;
     max-width: 10rem;
     cursor: pointer;
     font-weight: bold;
@@ -219,6 +221,7 @@ body{
 .taskButton{
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 100%;
     background-color: transparent;
     cursor: pointer;
@@ -230,11 +233,10 @@ body{
 }
 
 .checkButton{
-    align-self: center;
     border: 1px solid black;
-    border-radius: 50%;
-    width: 1rem;
-    height: 1rem;
+    border-radius: 100px;
+    min-width: 1rem;
+    min-height: 1rem;
     background-color: transparent;
 }
 
@@ -244,4 +246,19 @@ body{
 
 .checkButtonActiveText{
     text-decoration: line-through;
+}
+
+.containerForInputs{
+    min-width: calc(32% - 1rem);
+    display: flex;
+    justify-content: flex-end;
+    gap:5%;
+}
+
+.dateInput{
+    background-color: transparent;
+}
+
+.colorInput{
+    width: 2rem;
 }

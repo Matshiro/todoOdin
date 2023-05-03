@@ -46,7 +46,17 @@ export function createButton(id, className, buttonText = null){
 }
 
 
-export function createAddProjectTask(div, isProject){
-
+export function createInput(id, className, typeOfInput){
+    const input = document.createElement('input');
+    if (id !== null){
+        input.id = id;
+    }
+    if (className !== null){
+        input.className = className;
+    }
+    if (typeOfInput !== null){
+        input.type = typeOfInput;
+    }
+    return input;
 }
 

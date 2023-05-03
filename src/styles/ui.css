@@ -9,12 +9,13 @@
 
     --background-color-sidenav: #FCFCFC;
     --background-color-header: #F3F3F3;
-    --button-backgroud-color-add: #69ff6911;
-    --button-backgroud-color-add-hover: #69ff6933;
-    --button-backgroud-color-cancel: #ff6b6b11;;
-    --button-backgroud-color-cancel-hover: #ff6b6b33;
-    --button-backgroud-color-active: #DDD;
-    --button-backgroud-color-hover: #EEE;
+    --button-background-color-add: #69ff6911;
+    --button-background-color-add-hover: #69ff6933;
+    --button-background-color-cancel: #ff6b6b11;;
+    --button-background-color-cancel-hover: #ff6b6b33;
+    --button-background-color-active: #DDD;
+    --button-background-color-hover: #EEE;
+    --button-background-color-checklist-hover: #00000099;
     --border-color-add: #33ff33;
     --border-color-cancel: #ff3333;
 }
@@ -59,11 +60,11 @@ body{
 }
 
 .sidenavButton:hover{
-    background-color: var(--button-backgroud-color-hover);
+    background-color: var(--button-background-color-hover);
 }
 
 .buttonClicked{
-    background-color: var(--button-backgroud-color-active) !important;
+    background-color: var(--button-background-color-active) !important;
 }
 
 .sidenavButton:first-child{
@@ -114,7 +115,7 @@ body{
 }
 
 .projectButton:hover{
-    background-color: var(--button-backgroud-color-hover);
+    background-color: var(--button-background-color-hover);
 }
 
 .projectButton:last-child{
@@ -144,28 +145,29 @@ body{
 }
 
 .addCancelButton{
-    min-width: 30%;
-    min-height: 15%;
+    width: 30%;
+    height: 15%;
+    max-width: 10rem;
     cursor: pointer;
     font-weight: bold;
 }
 
 #projectAdd{
-    background-color: var(--button-backgroud-color-add);
+    background-color: var(--button-background-color-add);
     border: solid 1px var(--border-color-add);
 }
 
 #projectAdd:hover{
-    background-color: var(--button-backgroud-color-add-hover);
+    background-color: var(--button-background-color-add-hover);
 }
 
 #projectCancel{
-    background-color: var(--button-backgroud-color-cancel);
+    background-color: var(--button-background-color-cancel);
     border: solid 1px var(--border-color-cancel);
 }
 
 #projectCancel:hover{
-    background-color: var(--button-backgroud-color-cancel-hover);
+    background-color: var(--button-background-color-cancel-hover);
 }
 
 .closeButton{
@@ -203,6 +205,17 @@ body{
     margin-bottom: 5%;
 }
 
+#createTaskInput{
+    font-size: var(--font-size-h3);
+    margin-bottom: 2%;
+}
+
+#taskContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .taskButton{
     display: flex;
     flex-direction: row;
@@ -213,6 +226,22 @@ body{
     border-radius: 5px;
 }
 .taskButton:hover{
-    background-color: var(--button-backgroud-color-hover);
+    background-color: var(--button-background-color-hover);
 }
 
+.checkButton{
+    align-self: center;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: transparent;
+}
+
+.checkButtonActive{
+    background-color: var(--button-background-color-checklist-hover);
+}
+
+.checkButtonActiveText{
+    text-decoration: line-through;
+}

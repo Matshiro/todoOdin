@@ -224,16 +224,25 @@ function removeTaskInput(container){
     container.remove();
 }
 
-export function createTaskButton(taskName){
+
+export function createTaskButton(taskName, projectName){
     const button = createButton("taskButton"+ taskName, "taskButton");
 
-    button.appendChild(createImg(null, "sidenavImage", list));
-    button.appendChild(createText("p", null, "sidenavText", taskName));
+    // button.appendChild(createImg(null, "sidenavImage", list));
+    const checkButton = createButton(null, "checkButton");
+    const text = createText("p", null, "sidenavText", taskName);
+    checkButton.addEventListener("click", function(){
+        checkButton.classList.toggle("checkButtonActive");
+        text.classList.toggle("checkButtonActiveText");
+    })
+    button.appendChild(checkButton);
+    button.appendChild(text);
     button.addEventListener("click", function(){
         return;
     })
     const closeButton = createButton(null,"closeButton",null);
     closeButton.addEventListener("click", function(){
+        deleteTask(taskName, button, projectName);
         return;
     })
 
@@ -249,7 +258,37 @@ export function createTaskButton(taskName){
 }
 
 
-function pushToLocalStorage(){
-    const mapString = JSON.stringify(Array.from(projectsList.entries()));
-    localStorage.setItem("projectsList", mapString);
+function deleteTask(taskName, button, projectName){
+    let project = projectsList.get(projectName.toString());
+    project.forEach((element, index) => {
+        if (element === taskName){
+            try{
+                project.splice(index, 1);
+                projectsList.set(projectName, project);
+                console.log(projectsList);
+                return;
+            }
+            catch(e){
+                console.log("Can't delete task: \n" + e);
+            }
+
+        }
+    });
+    if (localStorageExists){
+        pushToLocalStorage();
+    }
+    button.remove();
+    
 }
+
+
+function pushToLocalStorage(){
+    try{
+        const mapString = JSON.stringify(Array.from(projectsList.entries()));
+        localStorage.setItem("projectsList", mapString);
+    }
+    catch(e){
+        console.log("Error with writing info to localStorage \n" + e);
+    }
+}
+

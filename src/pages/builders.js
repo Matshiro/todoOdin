@@ -33,7 +33,6 @@ export function createImg(id = null, className, src){
 
 export function createButton(id, className, buttonText = null){
     const button = document.createElement('button');
-
     if (id !== null){
         button.id = id;
     }

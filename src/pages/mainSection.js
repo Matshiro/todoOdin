@@ -43,7 +43,7 @@ function getTaskList(projectName, container){
             if (taskButtonId != undefined){
                 return;
             }
-            return createTaskButton(element);
+            return createTaskButton(element, projectName);
             
         })
 }

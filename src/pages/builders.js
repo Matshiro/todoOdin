@@ -117,3 +117,21 @@ function sidenavButtonFocus(name){
     buttonFocus.classList.remove("buttonFocus");
     name.classList.add("buttonFocus");
 }
+
+export function createPTButton(type, img){
+    const button = createButton(type + "Button", "pTButton");
+    const buttonImg = createImg(img, null, "sidenavButtonImg");
+    const buttonText = createText("p", null, "sidenavButtonText", "Add "+ type);
+
+    button.appendChild(buttonImg);
+    button.appendChild(buttonText)
+    button.addEventListener("click", function(){
+        if (type === "Project"){
+            addNewProject();
+            return;
+        }
+        addNewTask();
+
+    });
+    return button;
+}

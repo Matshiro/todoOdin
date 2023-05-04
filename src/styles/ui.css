@@ -106,7 +106,7 @@ body{
     flex-direction: column;
 }
 
-.projectButton{
+.pTButton{
     background: transparent;
     cursor: pointer;
     display: flex;
@@ -118,11 +118,11 @@ body{
     gap: .5rem;
 }
 
-.projectButton:hover{
+.pTButton:hover{
     background-color: var(--button-background-color-hover);
 }
 
-.projectButton:last-child{
+.pTButton:last-child{
     gap: 2%;
 }
 

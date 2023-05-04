@@ -19,7 +19,7 @@ function checkLocalStorage(){
         checkForProjectList();
         localStorageExists = true;
       } else {
-        // listOfProjectMaps.set("Inbox", listOfTasksMap);
+        listOfProjectMaps.set("Inbox", listOfTasksMap);
     }
 }
 

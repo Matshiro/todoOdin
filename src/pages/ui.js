@@ -1,97 +1,67 @@
-import '../styles/ui.css'
-import inbox from '../assets/images/inbox.svg';
-import today from '../assets/images/today.svg';
-import week from '../assets/images/week.svg';
-import { createImg, createText, createButton } from './builders';
-
-import { addProjectButon } from './projectsAndTasks';
-
-export function createSidenav(){
-    const sidenavContainer = document.createElement('sidenav');
-    sidenavContainer.id = "sidenav";
-
-    const mainContainer = document.createElement('container');
-    mainContainer.id = "mainSidenavContainer";
-    sidenavContainer.appendChild(mainContainer);
-
-    mainContainer.appendChild(createSideButton("Inbox", inbox));
-    mainContainer.appendChild(createSideButton("Today", today));
-    mainContainer.appendChild(createSideButton("This week", week));
-    
-    mainContainer.appendChild(createText("div", "sidenavProjectText", null, "Projects"));
-
-    const projectsContainer = document.createElement('container');
-    projectsContainer.id = "projectsContainer";
-    mainContainer.appendChild(projectsContainer);
-
-    projectsContainer.appendChild(addProjectContainer());
-
-    return sidenavContainer;
-}
+import '../styles/ui.css';
+import imgInbox from '../assets/images/inbox.svg';
+import imgToday from '../assets/images/today.svg';
+import imgWeek from '../assets/images/week.svg';
+import { createDiv, createText, createImg, createButton, createInput, createSidenavButtons } from "./builders";
 
 
-function createSideButton(name, icon){
-
-    const button = createButton(null, "sidenavButton");
-    button.appendChild(createImg(null, "sidenavImage", icon));
-    button.appendChild(createText("p", null, "sidenavText", name));
-    button.addEventListener('click', function(){
-         buttonClicked(button);
-    })
-    if (name === "Inbox"){
-        button.classList.add("buttonClicked");
+export function createUI(){
+    try{
+        createSidenav();
     }
-    return button;
-
-}
-
-export function buttonClicked(button){
-    const buttonClicked = document.querySelector(".buttonClicked");
-    if (!buttonClicked){
-        button.classList.add("buttonClicked");
-        return;
+    catch(e){
+        console.log("Problem with creating sidenav\n" + e);
     }
-    buttonClicked.classList.remove("buttonClicked");
-    button.classList.add("buttonClicked");
+    createRightSection();
 }
 
-function addProjectContainer(){
-    const div = document.createElement('div');
-    div.id = "createProjectDiv";
+function createSidenav(){
+    const sidenavContainer = createDiv("sidenav", "sidenav");
+    const buttonContainer = createButtonContainer();
+    const projectText = createText("div", "sideNavProjectText", null, "Projects");
+    const projectsContainer = createProjectsContainer();
 
-    addProjectButon(div);
+    sidenavContainer.appendChild(buttonContainer);
+    sidenavContainer.appendChild(projectText);
+    sidenavContainer.appendChild(projectsContainer);
 
-    return div;
+    return document.body.appendChild(sidenavContainer);
 }
 
-export function createRightSection(){
-    const container = document.createElement('container');
-    container.id = "rightContainer";
-    container.appendChild(createHeader());
-    container.appendChild(createMain());
+function createButtonContainer(){
+    const buttonContainer = createDiv("container", "sidenavButtonContainer");
+    const buttons = {
+        Inbox: ["Inbox", imgInbox],
+        Today: ["Today", imgToday],
+        Week: ["This week", imgWeek]
+    }
+    buttonContainer.appendChild(createSidenavButtons(buttons.Inbox[0], buttons.Inbox[1]));
+    buttonContainer.appendChild(createSidenavButtons(buttons.Today[0], buttons.Today[1]));
+    buttonContainer.appendChild(createSidenavButtons(buttons.Week[0], buttons.Week[1]));
+
+    return buttonContainer;
+}
+
+function createProjectsContainer(){
+    const projectsContainer = createDiv("container", "projectsContainer")
+
+    return projectsContainer;
+}
+
+function createRightSection(){
+    const container = createDiv("container", "rightContainer");
+    const header = createHeader();
+    const mainSection = createMain();
+    // container.appendChild(header);
+    // container.appendChild(mainSection);
 
     return container;
 }
-
 
 function createHeader(){
-    const container = document.createElement('container');
-    container.id = "headerContainer";
-    container.appendChild(createText("h1", "headerText", null, "List doTo"));
-
-    return container;
+    return;
 }
 
 function createMain(){
-    const container = document.createElement('contaier');
-    container.id = "mainContainer";
-
-    container.appendChild(createText("h2", "mainSectionHeader", null, "Inbox"));
-
-    const taskContainer = document.createElement('container');
-    taskContainer.id = "taskContainer";
-    container.appendChild(taskContainer);
-
-    return container;
+    return;
 }
-

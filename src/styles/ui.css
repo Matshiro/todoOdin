@@ -34,16 +34,18 @@ body{
 }
 
 #sidenav{
-    width: 15%;
-    min-width: 250px;
-}
-
-#mainSidenavContainer{
     display: flex;
     flex-direction: column;
+    width: 15%;
+    min-width: 250px;
     height: 100%;
     background: var(--background-color-sidenav);
     border-right: solid 0.5px var(--border-color-sidenav);
+}
+
+#sidenavButtonContainer{
+    display: flex;
+    flex-direction: column;
 }
 
 .sidenavButton{
@@ -63,7 +65,7 @@ body{
     background-color: var(--button-background-color-hover);
 }
 
-.buttonClicked{
+.buttonFocus{
     background-color: var(--button-background-color-active) !important;
 }
 
@@ -71,7 +73,7 @@ body{
     margin-top: 30%;
 }
 
-.sidenavText{
+.sidenavButtonText{
     min-width: 65%;
     max-width: 65%;
     font-size: var(--font-size-p);
@@ -85,12 +87,12 @@ body{
     white-space: nowrap;
 }
 
-.sidenavImage{
+.sidenavButtonImg{
     max-width: 1.5rem;
     max-height: auto;
 }
 
-#sidenavProjectText{
+#sideNavProjectText{
     padding-left: 10%;
     margin-top: 20%;
     padding-top: 5%;

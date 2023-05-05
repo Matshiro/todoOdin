@@ -48,7 +48,7 @@ function createButtonContainer(){
 
 function createProjectsContainer(){
     const projectsContainer = createDiv("container", "projectsContainer");
-    const projectAddButton = createPTButton("Project", imgAdd);
+    const projectAddButton = createPTButton("Project", imgAdd, projectsContainer);
 
     projectsContainer.appendChild(projectAddButton);
 
@@ -80,9 +80,45 @@ function createMain(){
     const container = createDiv("container", "mainContainer");
     const inboxText = createText("h2", "mainSectionHeader", null, "Inbox");
     const taskContainer = createDiv("container", "taskContainer");
+    const taskAddButton = createPTButton("Task", imgAdd, taskContainer);
 
     container.appendChild(inboxText);
     container.appendChild(taskContainer);
+    taskContainer.appendChild(taskAddButton);
 
     return container;
 }
+
+export function createInputForPT(type, parentContainer){
+    const container = createDiv("container", null, "inputContainer");
+    const input = createInput(`create${type}Input`, "inputBox", "text", type + " name", true);
+    const buttonContainer = createDiv("div", null, "acButtonsContainer");
+    const addButton = createButton(type + "Add", "acButton", "Add");
+    const cancelButton = createButton(type + "Cancel", "acButton", "Cancel");
+
+    if (type === "project"){
+        addButton.addEventListener("click", function(){
+            addProject();
+        });
+
+    }
+    if (type === "task"){
+        addButton.addEventListener("click", function(){
+            addTask();
+        });
+    }
+    cancelButton.addEventListener("click", function(){
+            cancelInput();
+    });
+    
+    container.appendChild(input);
+    container.appendChild(buttonContainer);
+    buttonContainer.appendChild(addButton);
+    buttonContainer.appendChild(cancelButton);
+
+
+    parentContainer.appendChild(container);
+    input.focus();
+    return;
+}
+

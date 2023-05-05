@@ -1,3 +1,5 @@
+import { buttonPTClicked } from "./projectsAndTasks";
+
 export function createDiv(type, id = null, className = null){
     const div = document.createElement(type);
 
@@ -67,7 +69,7 @@ export function createButton(id = null, className = null, buttonText = null){
 }
 
 
-export function createInput(id = null, className = null, typeOfInput = null){
+export function createInput(id = null, className = null, typeOfInput = null, placeholder = null, focus = null){
     const input = document.createElement('input');
     if (id !== null){
         input.id = id;
@@ -81,6 +83,12 @@ export function createInput(id = null, className = null, typeOfInput = null){
     }
     if (typeOfInput !== null){
         input.type = typeOfInput;
+    }
+    if (typeOfInput !== null){
+        input.placeholder = placeholder;
+    }
+    if (focus !== null && focus == true){
+        input.focus();
     }
     return input;
 }
@@ -118,7 +126,7 @@ function sidenavButtonFocus(name){
     name.classList.add("buttonFocus");
 }
 
-export function createPTButton(type, img){
+export function createPTButton(type, img, container){
     const button = createButton(type + "Button", "pTButton");
     const buttonImg = createImg(img, null, "sidenavButtonImg");
     const buttonText = createText("p", null, "sidenavButtonText", "Add "+ type);
@@ -126,12 +134,8 @@ export function createPTButton(type, img){
     button.appendChild(buttonImg);
     button.appendChild(buttonText)
     button.addEventListener("click", function(){
-        if (type === "Project"){
-            addNewProject();
-            return;
-        }
-        addNewTask();
-
+    buttonPTClicked(type, button, container)
     });
+
     return button;
 }

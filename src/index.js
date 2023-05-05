@@ -5,9 +5,8 @@ export let listOfProjectMaps = new Map;
 let listOfTasksMap = new Map;
 export let localStorageExists = false;
 
-localStorage.clear();
+
 createUI();
-testFunction();
 
 document.addEventListener("DOMContentLoaded", function() {
     checkLocalStorage();

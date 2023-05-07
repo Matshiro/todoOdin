@@ -7,11 +7,12 @@ export function createDiv(type, id = null, className = null){
         div.id = id;
     }
     if (className !== null){
-        if (className == Array){
-            addClassNamesToObject(div);
-            return;
+        if (Array.isArray(className)){
+            addClassNamesToObject(div, className);
         }
-        div.className = className;
+        else{
+            div.className = className;
+        }
     }
     return div;
 }
@@ -24,11 +25,12 @@ export function createText(type, id = null, className = null, textValue = null){
         text.id = id;
     }
     if (className !== null){
-        if (className == Array){
-            addClassNamesToObject(text);
-            return;
+        if (Array.isArray(className)){
+            addClassNamesToObject(text, className);
         }
-        text.className = className;
+        else{
+            text.className = className;
+        }
     }
     return text;
 }
@@ -41,11 +43,12 @@ export function createImg(src, id = null, className = null){
         img.id = id;
     }
     if (className !== null){
-        if (className == Array){
-            addClassNamesToObject(img);
-            return;
+        if (Array.isArray(className)){
+            addClassNamesToObject(img, className);
         }
-        img.className = className;
+        else{
+            img.className = className;
+        }
     }
     return img;
 }
@@ -56,11 +59,13 @@ export function createButton(id = null, className = null, buttonText = null){
         button.id = id;
     }
     if (className !== null){
-        if (className == Array){
-            addClassNamesToObject(button);
-            return;
+        if (Array.isArray(className)){
+            addClassNamesToObject(button, className);
         }
-        button.className = className;
+        else{
+            button.className = className;
+        }
+
     }
     if (buttonText !== null){
         button.textContent = buttonText;
@@ -75,11 +80,12 @@ export function createInput(id = null, className = null, typeOfInput = null, pla
         input.id = id;
     }
     if (className !== null){
-        if (className == Array){
-            addClassNamesToObject(input);
-            return;
+        if (Array.isArray(className)){
+            addClassNamesToObject(input, className);
         }
-        input.className = className;
+        else{
+            input.className = className;
+        }
     }
     if (typeOfInput !== null){
         input.type = typeOfInput;
@@ -94,11 +100,11 @@ export function createInput(id = null, className = null, typeOfInput = null, pla
 }
 
 
-function addClassNamesToObject(object){
-    object.forEach(element => {
+function addClassNamesToObject(object,className){
+    className.forEach(element => {
         object.classList.add(element);
     });
-    return object;
+    return;
 }
 
 export function createSidenavButtons(name, img){

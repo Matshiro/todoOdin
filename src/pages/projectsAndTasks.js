@@ -1,5 +1,6 @@
 import { listOfTasksMap, listOfProjectMaps } from "..";
-import { createInputForPT } from "./ui";
+import { createInputForPT, addProjectToProjectList } from "./ui";
+import {createPTButton} from "./builders";
 
 // export function testFunction(){
 //     let listOfTasksMap = new Map;
@@ -47,10 +48,29 @@ export function buttonPTClicked(type, parentButton, container){
     }
 }
 
-export function addProject(){
+export function addProject(inputValue, parentContainer){
+    listOfProjectMaps.set(inputValue, new Map);
+    pushChangesToLocalStorage();
+    addProjectToProjectList(inputValue, parentContainer);
     return;
 }
 
-export function cancelInput(){
+export function addTask(){
+    // Dodawanie do projektu po wyszukaniu aktualnie aktywnego buttona.
+    // Albooooo
+    // Zbieranie nazwy danego projektu po nazwie kontenera (będzie przecież nazwa danego projektu
+    // jako h2)
+}
+
+export function removeInput(type, parentContainer, container, imgAdd){
+    container.remove();
+    parentContainer.appendChild(createPTButton(type, imgAdd, parentContainer));
     return;
+}
+
+export function deleteProject(button, projectName){
+    button.remove();
+    listOfProjectMaps.delete(projectName);
+    pushChangesToLocalStorage();
+    localStorage.removeItem(projectName);
 }

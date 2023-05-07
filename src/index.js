@@ -1,5 +1,6 @@
 import { testFunction } from "./pages/projectsAndTasks";
 import { createUI } from "./pages/ui";
+import { addProjectToProjectList } from "./pages/ui";
 
 export let listOfProjectMaps = new Map;
 let listOfTasksMap = new Map;
@@ -53,11 +54,21 @@ function storageAvailable(type) {
 function checkForProjectList(){
     const localStorageProjectList = localStorage.getItem("listOfProjectMaps");
     listOfProjectMaps = new Map(JSON.parse(localStorageProjectList));
+    const projectContainer = document.getElementById("projectsContainer");
+    const inboxTaskContainer = document.getElementById("mainContainer");
+    if (listOfProjectMaps.size === 0){
+      listOfProjectMaps.set("Inbox", listOfTasksMap);
+      return;
+    }
     for (let key of listOfProjectMaps.keys()){
         try{
             const localProject = localStorage.getItem(key.toString());
             listOfTasksMap = new Map(JSON.parse(localProject));
             listOfProjectMaps.set(key, listOfTasksMap);
+            if (key === "Inbox"){
+              continue;
+            }
+            addProjectToProjectList(key, projectContainer);
         }
         catch(e){
             console.log("Error while getting listOfProjectMaps from localStorage" + e);

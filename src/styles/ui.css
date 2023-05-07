@@ -126,12 +126,12 @@ body{
     gap: 2%;
 }
 
-#inputContainer{
+.inputContainer{
     display: flex;
     flex-direction: column;
 }
 
-#createProjectInput{
+.inputBox{
     width: 80%;
     align-self: center;
     border: solid 1px var(--border-color-sidenav);
@@ -141,14 +141,14 @@ body{
 }
 
 
-#createProjectDivButtons{
+.acButtonsContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5%;
 }
 
-.addCancelButton{
+.acButton{
     width: 30%;
     height: 100%;
     max-width: 10rem;
@@ -156,21 +156,21 @@ body{
     font-weight: bold;
 }
 
-#projectAdd{
+.addButton{
     background-color: var(--button-background-color-add);
     border: solid 1px var(--border-color-add);
 }
 
-#projectAdd:hover{
+.addButton:hover{
     background-color: var(--button-background-color-add-hover);
 }
 
-#projectCancel{
+.cancelButton{
     background-color: var(--button-background-color-cancel);
     border: solid 1px var(--border-color-cancel);
 }
 
-#projectCancel:hover{
+.cancelButton:hover{
     background-color: var(--button-background-color-cancel-hover);
 }
 

@@ -6,7 +6,7 @@ import imgAdd from '../assets/images/add.svg';
 import imgClose from '../assets/images/close.svg';
 import imgList from '../assets/images/list.svg';
 import { createDiv, createText, createImg, createButton, createInput, createSidenavButtons, createPTButton } from "./builders";
-
+import { removeInput, addProject, addTask, deleteProject, deleteTask } from './projectsAndTasks';
 
 export function createUI(){
     try{
@@ -93,22 +93,24 @@ export function createInputForPT(type, parentContainer){
     const container = createDiv("container", null, "inputContainer");
     const input = createInput(`create${type}Input`, "inputBox", "text", type + " name", true);
     const buttonContainer = createDiv("div", null, "acButtonsContainer");
-    const addButton = createButton(type + "Add", "acButton", "Add");
-    const cancelButton = createButton(type + "Cancel", "acButton", "Cancel");
+    const addButton = createButton(null, ["acButton", "addButton"], "Add");
+    const cancelButton = createButton(null, ["acButton", "cancelButton"], "Cancel");
 
-    if (type === "project"){
+    if (type === "Project"){
         addButton.addEventListener("click", function(){
-            addProject();
+            addProject(input.value, parentContainer);
+            removeInput(type, parentContainer, container, imgAdd);
         });
 
     }
-    if (type === "task"){
+    if (type === "Task"){
         addButton.addEventListener("click", function(){
             addTask();
+            removeInput(type, parentContainer, container, imgAdd);
         });
     }
     cancelButton.addEventListener("click", function(){
-            cancelInput();
+        removeInput(type, parentContainer, container, imgAdd);
     });
     
     container.appendChild(input);
@@ -122,3 +124,22 @@ export function createInputForPT(type, parentContainer){
     return;
 }
 
+export function addProjectToProjectList(projectName, parentContainer){
+    const button = createButton(null, "pTButton");
+    const buttonImg = createImg(imgList, null, "sidenavButtonImg");
+    const buttonText = createText("p", null, "sidenavButtonText", projectName);
+    const container = parentContainer;
+    const closeButton = createButton(null, "closeButton");
+    const closeButtonImg = createImg(imgClose, null, "sidenavButtonImg");
+
+    closeButton.addEventListener("click", function(){
+        deleteProject(button, projectName);
+    })
+
+    button.appendChild(buttonImg);
+    button.appendChild(buttonText);
+    closeButton.appendChild(closeButtonImg);
+    button.appendChild(closeButton);
+
+    return container.insertBefore(button, container.lastChild);
+}

@@ -48,7 +48,7 @@ function createButtonContainer(){
 
 function createProjectsContainer(){
     const projectsContainer = createDiv("container", "projectsContainer");
-    const projectAddButton = createPTButton("Project", imgAdd, projectsContainer);
+    const projectAddButton = createPTButton("Project", imgAdd, projectsContainer, null);
 
     projectsContainer.appendChild(projectAddButton);
 
@@ -60,7 +60,7 @@ function createProjectsContainer(){
 function createRightSection(){
     const container = createDiv("container", "rightContainer");
     const header = createHeader();
-    const mainSection = createMain();
+    const mainSection = createMain("Inbox");
     container.appendChild(header);
     container.appendChild(mainSection);
 
@@ -76,20 +76,21 @@ function createHeader(){
     return container;
 }
 
-function createMain(){
+function createMain(activeButtonName){
     const container = createDiv("container", "mainContainer");
-    const inboxText = createText("h2", "mainSectionHeader", null, "Inbox");
+    const text = createText("h2", "mainSectionHeader", null, activeButtonName);
     const taskContainer = createDiv("container", "taskContainer");
-    const taskAddButton = createPTButton("Task", imgAdd, taskContainer);
+    const taskAddButton = createPTButton("Task", imgAdd, taskContainer, activeButtonName);
 
-    container.appendChild(inboxText);
+
+    container.appendChild(text);
     container.appendChild(taskContainer);
     taskContainer.appendChild(taskAddButton);
 
     return container;
 }
 
-export function createInputForPT(type, parentContainer){
+export function createInputForPT(type, parentContainer, activeButtonName){
     const container = createDiv("container", null, "inputContainer");
     const input = createInput(`create${type}Input`, "inputBox", "text", type + " name", true);
     const buttonContainer = createDiv("div", null, "acButtonsContainer");
@@ -98,19 +99,18 @@ export function createInputForPT(type, parentContainer){
 
     if (type === "Project"){
         addButton.addEventListener("click", function(){
-            addProject(input.value, parentContainer);
-            removeInput(type, parentContainer, container, imgAdd);
+            addProject(input, type, parentContainer, container, imgAdd);
+
         });
 
     }
     if (type === "Task"){
         addButton.addEventListener("click", function(){
-            addTask();
-            removeInput(type, parentContainer, container, imgAdd);
+            addTask(activeButtonName, input, type, parentContainer, container, imgAdd);
         });
     }
     cancelButton.addEventListener("click", function(){
-        removeInput(type, parentContainer, container, imgAdd);
+        removeInput(type, parentContainer, container, imgAdd, activeButtonName);
     });
     
     container.appendChild(input);
@@ -124,22 +124,32 @@ export function createInputForPT(type, parentContainer){
     return;
 }
 
-export function addProjectToProjectList(projectName, parentContainer){
+export function addPTToPTList(name, parentContainer, isTask){
     const button = createButton(null, "pTButton");
-    const buttonImg = createImg(imgList, null, "sidenavButtonImg");
-    const buttonText = createText("p", null, "sidenavButtonText", projectName);
+    const buttonImg = createImg(imgList, "Image of a list", null, "sidenavButtonImg");
+    const buttonText = createText("p", null, "sidenavButtonText", name);
     const container = parentContainer;
     const closeButton = createButton(null, "closeButton");
-    const closeButtonImg = createImg(imgClose, null, "sidenavButtonImg");
+    const closeButtonImg = createImg(imgClose, "Cross for closing", null, "sidenavButtonImg");
 
     closeButton.addEventListener("click", function(){
-        deleteProject(button, projectName);
+        deleteProject(button, name);
     })
 
     button.appendChild(buttonImg);
     button.appendChild(buttonText);
+    if (isTask){
+        button.classList.add("taskButton");
+        const containerForInputs = createDiv("container", null, "containerForInputs");
+        const colorInput = createInput(null, "colorInput", "color", "#FFF");
+        const dateInput = createInput(null, "dateInput", "date");
+        button.appendChild(containerForInputs);
+        containerForInputs.appendChild(colorInput);
+        containerForInputs.appendChild(dateInput);
+    }
     closeButton.appendChild(closeButtonImg);
     button.appendChild(closeButton);
+
 
     return container.insertBefore(button, container.lastChild);
 }

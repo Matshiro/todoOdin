@@ -35,9 +35,10 @@ export function createText(type, id = null, className = null, textValue = null){
     return text;
 }
 
-export function createImg(src, id = null, className = null){
+export function createImg(src, alt, id = null, className = null){
     const img = document.createElement('img');
     img.src = src;
+    img.alt = alt;
 
     if (id != null){
         img.id = id;
@@ -109,7 +110,7 @@ function addClassNamesToObject(object,className){
 
 export function createSidenavButtons(name, img){
     const button = createButton(null, "sidenavButton");
-    const buttonImg = createImg(img, null, "sidenavButtonImg");
+    const buttonImg = createImg(img, name+" icon", null, "sidenavButtonImg");
     const buttonText = createText("p", null, "sidenavButtonText", name);
     button.appendChild(buttonImg);
     button.appendChild(buttonText);
@@ -132,15 +133,15 @@ function sidenavButtonFocus(name){
     name.classList.add("buttonFocus");
 }
 
-export function createPTButton(type, img, container){
+export function createPTButton(type, img, container, activeButtonName){
     const button = createButton(type + "Button", "pTButton");
-    const buttonImg = createImg(img, null, "sidenavButtonImg");
+    const buttonImg = createImg(img, "plus icon", null, "sidenavButtonImg");
     const buttonText = createText("p", null, "sidenavButtonText", "Add "+ type);
 
     button.appendChild(buttonImg);
     button.appendChild(buttonText)
     button.addEventListener("click", function(){
-    buttonPTClicked(type, button, container)
+    buttonPTClicked(type, button, container, activeButtonName)
     });
 
     return button;

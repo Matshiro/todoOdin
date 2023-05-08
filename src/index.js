@@ -1,6 +1,5 @@
 import { testFunction } from "./pages/projectsAndTasks";
-import { createUI } from "./pages/ui";
-import { addProjectToProjectList } from "./pages/ui";
+import { addPTToPTList, createUI } from "./pages/ui";
 
 export let listOfProjectMaps = new Map;
 let listOfTasksMap = new Map;
@@ -68,14 +67,22 @@ function checkForProjectList(){
             if (key === "Inbox"){
               continue;
             }
-            addProjectToProjectList(key, projectContainer);
+            addPTToPTList(key, projectContainer, false);
         }
         catch(e){
-            console.log("Error while getting listOfProjectMaps from localStorage" + e);
+            console.log("Error while getting listOfProjectMaps from localStorage\n" + e);
         }
         finally{
             continue;
         }
+    }
+    for (let key of listOfProjectMaps.get("Inbox").keys()){
+      try{
+        addPTToPTList(key, inboxTaskContainer, true);
+      }
+      catch(e){
+        console.log("Error while generating tasks to Inbox \n" + e)
+      }
     }
     return;
 }

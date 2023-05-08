@@ -1,6 +1,12 @@
 import { listOfTasksMap, listOfProjectMaps } from "..";
-import { createInputForPT, addProjectToProjectList } from "./ui";
+import { createInputForPT, addPTToPTList } from "./ui";
 import {createPTButton} from "./builders";
+
+const date = new Date();
+const currentDay = date.getDate();
+const currentMonth = date.getMonth() + 1;
+const currentYear = date.getFullYear();
+const currentDate = `${currentDay}-${currentMonth}-${currentYear}`;
 
 // export function testFunction(){
 //     let listOfTasksMap = new Map;
@@ -38,33 +44,57 @@ function pushChangesToLocalStorage(){
     }
 }
 
-export function buttonPTClicked(type, parentButton, container){
+export function buttonPTClicked(type, parentButton, container, activeButtonName){
     try{
         parentButton.remove();
-        createInputForPT(type, container);
+        createInputForPT(type, container, activeButtonName);
     }
     catch(e){
         console.log("Can't create input for " + type + "\n" + e);
     }
 }
 
-export function addProject(inputValue, parentContainer){
-    listOfProjectMaps.set(inputValue, new Map);
+export function addProject(input, type, parentContainer, container, imgAdd){
+    if (input.value === ""){
+        input.placeholder = "Can't be empty";
+        return;
+    }
+    if (listOfProjectMaps.has(input.value)){
+        input.value = ""
+        input.placeholder = "Project exsist."
+        return;
+    }
+    listOfProjectMaps.set(input.value, new Map);
     pushChangesToLocalStorage();
-    addProjectToProjectList(inputValue, parentContainer);
+    addPTToPTList(input.value, parentContainer, false);
+    removeInput(type, parentContainer, container, imgAdd);
     return;
 }
 
-export function addTask(){
-    // Dodawanie do projektu po wyszukaniu aktualnie aktywnego buttona.
-    // Albooooo
-    // Zbieranie nazwy danego projektu po nazwie kontenera (będzie przecież nazwa danego projektu
-    // jako h2)
+export function addTask(projectName, taskInput, type, parentContainer, container, imgAdd){
+    const valueMapofProjectName = listOfProjectMaps.get(projectName)
+
+    if (taskInput.value === ""){
+        taskInput.placeholder = "Task must have a name.";
+        return;
+    }
+    if (valueMapofProjectName.has(taskInput.value)){
+        taskInput.value = "";
+        taskInput.placeholder = "Task already exists.";
+        return;
+    }
+
+    valueMapofProjectName.set(taskInput.value, ["#FFF", currentDate])
+    listOfProjectMaps.set(projectName, valueMapofProjectName);
+    pushChangesToLocalStorage();
+    addPTToPTList(input.value, parentContainer, true);
+    removeInput(type, parentContainer, container, imgAdd, projectName);
+
 }
 
-export function removeInput(type, parentContainer, container, imgAdd){
+export function removeInput(type, parentContainer, container, imgAdd, activeButtonName){
     container.remove();
-    parentContainer.appendChild(createPTButton(type, imgAdd, parentContainer));
+    parentContainer.appendChild(createPTButton(type, imgAdd, parentContainer, activeButtonName));
     return;
 }
 

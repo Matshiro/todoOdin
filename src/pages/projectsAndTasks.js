@@ -40,7 +40,7 @@ function pushChangesToLocalStorage(){
         console.log("Error with writing info to local storage\n" + e);
     }
     finally{
-        console.log(listOfProjectMaps);
+        // console.log(listOfProjectMaps);
     }
 }
 
@@ -103,4 +103,10 @@ export function deleteProject(button, projectName){
     listOfProjectMaps.delete(projectName);
     pushChangesToLocalStorage();
     localStorage.removeItem(projectName);
+}
+
+export function deleteTask(button, projectName, parentContainerName){
+    button.remove();
+    listOfProjectMaps.get(parentContainerName).delete(projectName);
+    pushChangesToLocalStorage();
 }

@@ -132,13 +132,20 @@ export function addPTToPTList(name, parentContainer, isTask, backgroundColor, ta
     const closeButton = createButton(null, "closeButton");
     const closeButtonImg = createImg(imgClose, "Cross for closing", null, "sidenavButtonImg");
 
-    closeButton.addEventListener("click", function(){
-        deleteProject(button, name);
-    })
+    if (!isTask){
+        closeButton.addEventListener("click", function(){
+            deleteProject(button, name);
+        })
+    }
 
     button.appendChild(buttonImg);
     button.appendChild(buttonText);
     if (isTask){
+
+        closeButton.addEventListener("click", function(){
+            deleteTask(button, name, parentContainer.firstChild.textContent);
+        })
+
         button.classList.add("taskButton");
         const containerForInputs = createDiv("container", null, "containerForInputs");
         const colorInput = createInput(null, "colorInput", "color");

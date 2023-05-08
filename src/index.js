@@ -55,6 +55,7 @@ function checkForProjectList(){
     listOfProjectMaps = new Map(JSON.parse(localStorageProjectList));
     const projectContainer = document.getElementById("projectsContainer");
     const inboxTaskContainer = document.getElementById("mainContainer");
+   
     if (listOfProjectMaps.size === 0){
       listOfProjectMaps.set("Inbox", listOfTasksMap);
       return;
@@ -78,8 +79,9 @@ function checkForProjectList(){
     }
     for (let key of listOfProjectMaps.get("Inbox").keys()){
       try{
-        const taskColor = key[0];
-        const taskDate = key[1];
+        const keyValue = listOfProjectMaps.get("Inbox").get(key)
+        const taskColor = keyValue[0];
+        const taskDate = keyValue[1];
         addPTToPTList(key, inboxTaskContainer, true, taskColor, taskDate);
       }
       catch(e){

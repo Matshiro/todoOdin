@@ -55,7 +55,8 @@ export function buttonPTClicked(type, parentButton, container, activeButtonName)
 }
 
 export function addProject(input, type, parentContainer, container, imgAdd){
-    if (input.value === ""){
+    if (input.value === "" || input.value.match(/^ *$/) !== null){
+        input.value = "";
         input.placeholder = "Can't be empty";
         return;
     }
@@ -74,7 +75,8 @@ export function addProject(input, type, parentContainer, container, imgAdd){
 export function addTask(projectName, taskInput, type, parentContainer, container, imgAdd){
     const valueMapofProjectName = listOfProjectMaps.get(projectName)
 
-    if (taskInput.value === ""){
+    if (taskInput.value === "" || taskInput.value.match(/^ *$/) !== null){
+        taskInput.value = "";
         taskInput.placeholder = "Task must have a name.";
         return;
     }

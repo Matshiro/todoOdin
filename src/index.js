@@ -78,11 +78,13 @@ function checkForProjectList(){
         }
     }
     for (let key of listOfProjectMaps.get("Inbox").keys()){
-      try{
-        const keyValue = listOfProjectMaps.get("Inbox").get(key)
+              const keyValue = listOfProjectMaps.get("Inbox").get(key)
         const taskColor = keyValue[0];
         const taskDate = keyValue[1];
+        console.log(taskDate);
         addPTToPTList(key, inboxTaskContainer, true, taskColor, taskDate);
+      try{
+
       }
       catch(e){
         console.log("Error while generating tasks to Inbox \n" + e)

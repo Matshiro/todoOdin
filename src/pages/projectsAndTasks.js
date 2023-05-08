@@ -3,10 +3,10 @@ import { createInputForPT, addPTToPTList } from "./ui";
 import {createPTButton} from "./builders";
 
 const date = new Date();
-const currentDay = date.getDate();
-const currentMonth = date.getMonth() + 1;
-const currentYear = date.getFullYear();
-const currentDate = `${currentDay}-${currentMonth}-${currentYear}`;
+const dateString = date.toJSON();
+const dateStringForInput = dateString.slice(0,10);
+
+
 
 // export function testFunction(){
 //     let listOfTasksMap = new Map;
@@ -84,10 +84,10 @@ export function addTask(projectName, taskInput, type, parentContainer, container
         return;
     }
 
-    valueMapofProjectName.set(taskInput.value, ["#FFF", currentDate])
+    valueMapofProjectName.set(taskInput.value, ["#FFFFFF", dateStringForInput])
     listOfProjectMaps.set(projectName, valueMapofProjectName);
     pushChangesToLocalStorage();
-    addPTToPTList(taskInput.value, parentContainer, true, "#FFF", currentDate);
+    addPTToPTList(taskInput.value, parentContainer, true, "#FFFFFF", dateStringForInput);
     removeInput(type, parentContainer, container, imgAdd, projectName);
 
 }

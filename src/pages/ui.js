@@ -124,7 +124,7 @@ export function createInputForPT(type, parentContainer, activeButtonName){
     return;
 }
 
-export function addPTToPTList(name, parentContainer, isTask){
+export function addPTToPTList(name, parentContainer, isTask, backgroundColor, taskDate){
     const button = createButton(null, "pTButton");
     const buttonImg = createImg(imgList, "Image of a list", null, "sidenavButtonImg");
     const buttonText = createText("p", null, "sidenavButtonText", name);
@@ -141,8 +141,10 @@ export function addPTToPTList(name, parentContainer, isTask){
     if (isTask){
         button.classList.add("taskButton");
         const containerForInputs = createDiv("container", null, "containerForInputs");
-        const colorInput = createInput(null, "colorInput", "color", "#FFF");
+        const colorInput = createInput(null, "colorInput", "color");
+        colorInput.value = backgroundColor;
         const dateInput = createInput(null, "dateInput", "date");
+        dateInput.value = taskDate;
         button.appendChild(containerForInputs);
         containerForInputs.appendChild(colorInput);
         containerForInputs.appendChild(dateInput);

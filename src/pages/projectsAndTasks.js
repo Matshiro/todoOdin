@@ -87,7 +87,7 @@ export function addTask(projectName, taskInput, type, parentContainer, container
     valueMapofProjectName.set(taskInput.value, ["#FFF", currentDate])
     listOfProjectMaps.set(projectName, valueMapofProjectName);
     pushChangesToLocalStorage();
-    addPTToPTList(input.value, parentContainer, true);
+    addPTToPTList(taskInput.value, parentContainer, true, "#FFF", currentDate);
     removeInput(type, parentContainer, container, imgAdd, projectName);
 
 }

@@ -112,3 +112,17 @@ export function deleteTask(button, projectName, parentContainerName){
     listOfProjectMaps.get(parentContainerName).delete(projectName);
     pushChangesToLocalStorage();
 }
+
+export function changeValuesOnTask(nameOfProject, nameOfTask, nameOfInput, inputValue){
+    let valueOfTask = listOfProjectMaps.get(nameOfProject).get(nameOfTask);
+    if (nameOfInput === "colorInput"){
+        valueOfTask[0] = inputValue;
+    }
+    if (nameOfInput === "dateInput"){
+        valueOfTask[1] = inputValue;
+    }
+
+    listOfProjectMaps.get(nameOfProject).set(nameOfTask, valueOfTask);
+    pushChangesToLocalStorage();
+
+}

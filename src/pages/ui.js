@@ -6,7 +6,8 @@ import imgAdd from '../assets/images/add.svg';
 import imgClose from '../assets/images/close.svg';
 import imgList from '../assets/images/list.svg';
 import { createDiv, createText, createImg, createButton, createInput, createSidenavButtons, createPTButton } from "./builders";
-import { removeInput, addProject, addTask, deleteProject, deleteTask } from './projectsAndTasks';
+import { removeInput, addProject, addTask, deleteProject, deleteTask, changeValuesOnTask } from './projectsAndTasks';
+import { listOfProjectMaps } from '..';
 
 export function createUI(){
     try{
@@ -131,6 +132,7 @@ export function addPTToPTList(name, parentContainer, isTask, backgroundColor, ta
     const container = parentContainer;
     const closeButton = createButton(null, "closeButton");
     const closeButtonImg = createImg(imgClose, "Cross for closing", null, "sidenavButtonImg");
+    const nameOfContainer = document.getElementById("mainSectionHeader").textContent;
 
     if (!isTask){
         closeButton.addEventListener("click", function(){
@@ -143,15 +145,23 @@ export function addPTToPTList(name, parentContainer, isTask, backgroundColor, ta
     if (isTask){
 
         closeButton.addEventListener("click", function(){
-            deleteTask(button, name, parentContainer.firstChild.textContent);
+            deleteTask(button, name, nameOfContainer);
         })
 
         button.classList.add("taskButton");
         const containerForInputs = createDiv("container", null, "containerForInputs");
         const colorInput = createInput(null, "colorInput", "color");
         colorInput.value = backgroundColor;
+        buttonText.style.backgroundColor = colorInput.value;
+        colorInput.addEventListener("change", function(){
+            changeValuesOnTask(nameOfContainer, name, "colorInput" , colorInput.value);
+            buttonText.style.backgroundColor = colorInput.value;       
+        })
         const dateInput = createInput(null, "dateInput", "date");
         dateInput.value = taskDate;
+        dateInput.addEventListener("change", function(){
+            changeValuesOnTask(nameOfContainer, name, "dateInput" , dateInput.value);         
+        })
         button.appendChild(containerForInputs);
         containerForInputs.appendChild(colorInput);
         containerForInputs.appendChild(dateInput);
